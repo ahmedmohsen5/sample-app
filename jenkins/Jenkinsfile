@@ -34,8 +34,7 @@ pipeline{
                     
                     echo 'ready to push'
                      //Push the Docker image to the registry
-                    docker.withRegistry("https://${DOCKER_REGISTRY}", "${DOCKER_CREDENTIALS_ID}") {
-                        dockerImage.push("${IMAGE_TAG}")
+                    sh "docker push ${DOCKER_REPO}:${IMAGE_TAG}"
                     }
                 }
             }
