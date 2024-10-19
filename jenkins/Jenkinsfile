@@ -4,7 +4,7 @@ pipeline{
       environment {
         DOCKER_REGISTRY = 'docker.io'           // Replace with your Docker registry
         DOCKER_REPO = 'ahmed5555555555/simple-app' // Replace with your Docker repository
-        IMAGE_TAG = 'latest'                    // Replace with the tag you want to use
+        IMAGE_TAG = 'V1'                    // Replace with the tag you want to use
         DOCKER_CREDENTIALS_ID = 'dockerhub' // Replace with the Jenkins credentials ID
     }
     
