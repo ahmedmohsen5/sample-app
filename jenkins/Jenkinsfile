@@ -18,20 +18,16 @@ pipeline{
                 }
             }
         }
-         stage('Login to Docker Registry') {
+         stage('Login to Docker') {
             steps {
-                script {
-                
-                    def dockerCredentials = Jenkins.instance.getCredentials().find { it.id == ${DOCKER_CREDENTIALS_ID} }
-                    def username = dockerCredentials.username
-                    def password = dockerCredentials.password.getPlainText()
-
-                    // Login to Docker Hub
-                    sh "echo '${password}' | docker login -u '${username}' --password-stdin"
+                withCredentials([usernamePassword(credentialsId: "$DOCKER_CREDENTIALS_ID", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    script {
+                        // Login to Docker
+                        sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                    }
                 }
             }
         }
-
         stage('Push Docker Image') {
             steps {
                 script {
